@@ -1,5 +1,8 @@
 from django import forms
 from rango.models import Page, Category
+from django.contrib.auth.models import User 
+from rango.models import UserProfile
+
 
 
 class CategoryForm(forms.ModelForm):
@@ -31,4 +34,17 @@ class PageForm(forms.ModelForm):
 		model = Page # provide an association between the modelform and a model.
 		# exclude the fields u dont want or specify the ones you do with fields = ('title', 'url', 'views')
 		exclude = ('category',)
+
+class UserForm(forms.ModelForm):
+	password = forms.CharField(widget=forms.PasswordInput())
+
+	class Meta: 
+		model = User
+		fields = ('username', 'email', 'password')
+
+class UserProfileForm(forms.ModelForm): 
+
+	class Meta:
+		model = UserProfile
+		fields = ('website', 'picture')
 
